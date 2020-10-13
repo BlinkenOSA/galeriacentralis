@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'Token Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Token Sans'), local('Token-Sans-Regular'),
+       url('../fonts/Token Sans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Token Sans-Regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Token Sans-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+	font-family: 'Token Sans';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Token Sans Bold'), local('Token-Sans-Bold'),
+		url('../fonts/Token Sans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('../fonts/Token Sans-Bold.woff') format('woff'), /* Modern Browsers */
+		url('../fonts/Token Sans-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+	font-family: 'TXT25';
+	font-style: normal;
+	font-weight: 600;
+	src: local('TXT25 Semibold'), local('TXT25-Semibold'),
+		url('../fonts/TXT25-VERSION-0.7-Semibold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('../fonts/TXT25-VERSION-0.7-Semibold.woff') format('woff'), /* Modern Browsers */
+		url('../fonts/TXT25-VERSION-0.7-Semibold.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+	font-family: 'TXT25';
+	font-style: normal;
+	font-weight: 700;
+	src: local('TXT25 Bold'), local('TXT25-Bold'),
+		url('../fonts/TXT25-VERSION-0.7-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('../fonts/TXT25-VERSION-0.7-Bold.woff') format('woff'), /* Modern Browsers */
+		url('../fonts/TXT25-VERSION-0.7-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+}

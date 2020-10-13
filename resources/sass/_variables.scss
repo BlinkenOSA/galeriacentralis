@@ -1,0 +1,133 @@
+//Variables
+$line-height: 1.25;
+$heading-line-height: 1.2;
+$margin: 1.25rem;
+$padding: 1.25rem;
+
+$gutter: 0.625rem;
+
+$border-radius: 5px;
+$box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+$hover-shadow: 2px 2px 7px rgba(0,0,0,0.1);
+$transition: 0.35s;
+$nav-toggle: 0.5s;
+$font-family: "Token Sans", Roboto, Helvetica, Arial, sans-serif;
+$code-font-family: Menlo, Consolas, monospace;
+$heading-font-family: "TXT25", serif;
+$quote-font-family: "Garamond", "Times New Roman", serif;
+$sup-top: -0.5em;
+$sub-bottom: -0.25em;
+
+//Switches
+$fluid-type-enabled: false;
+
+//Font Sizes
+$fonts:(
+	base-root: 16px,
+	base: 1rem,
+	small: 0.875rem
+);
+
+//Weights
+$normal: 400;
+$medium-weight: 500;
+$semibold: 600;
+$bold: 700;
+
+//Colors
+$colors: (
+	black: #000000,
+	white: #ffffff,
+	transparent: transparent,
+	madison: #31455D,
+	link-water: #BCC1D1,
+	light-slate-grey: #798796,
+	slate-grey: #6E7791,
+	fiord: #4E5466,
+	mischka: #9EA2B0,
+	rhino: #414756,
+	silver: #CDCDCD,
+);
+
+$colors: map-merge($colors, (
+	fore: black,
+	fore-sec: #363636,
+	back: map-get($colors, white),
+	back-sec: map-get($colors, light-slate-grey),
+	link: map-get($colors, light-slate-grey),
+	hover: #8b8b8b,
+	border: map-get($colors, light-slate-grey),
+	primary-high: map-get($colors, link-water),
+	primary-lighter: map-get($colors, mischka),
+	primary-light: map-get($colors, light-slate-grey),
+	primary: map-get($colors, slate-grey),
+	primary-dark: map-get($colors, fiord),
+	primary-darker: map-get($colors, rhino),
+	primary-low: map-get($colors, madison),
+));
+
+$breakpoints: (
+	default: null,
+	xs: 479px,
+	xs-up: 480px,
+	small: 719px,
+	small-up: 720px,
+	medium: 991px,
+	medium-up: 992px,
+	large: 1329px,
+	large-up: 1330px,
+	content-width: 1140px
+);
+
+$fluid-type: (
+	fluid-start: 320px,
+	fluid-end: 1400px,
+	fluid-small: 15px,
+	fluid-large: 19px
+);
+
+@function color($color) {
+	@if map-has-key($colors, $color) {
+		@return map-get($colors, $color);
+	} @else {
+		@return null;
+	}
+}
+
+@function breakpoint($breakpoint) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		@return map-get($breakpoints, $breakpoint);
+	} @else {
+		@return null;
+	}
+}
+
+@function rempx ($size) { @return 1px/$size;}
+$__1px: rempx(map-get($fonts, 'base-root')) * 1rem !default;
+
+$small: "only screen and (min-width : #{map-get($breakpoints, 'xs-up')})" !default;
+$medium: "only screen and (min-width : #{map-get($breakpoints, 'small-up')})" !default;
+$large: "only screen and (min-width : #{map-get($breakpoints, 'medium-up')})" !default;
+$xl: "only screen and (min-width : #{map-get($breakpoints, 'large-up')})" !default;
+
+$xs-down: "only screen and (max-width : #{map-get($breakpoints, 'xs')})" !default;
+$small-down: "only screen and (max-width : #{map-get($breakpoints, 'small')})" !default;
+$medium-down: "only screen and (max-width : #{map-get($breakpoints, 'medium')})" !default;
+$medium-only: "only screen and (min-width : #{map-get($breakpoints, 'small-up')}) and (max-width : #{map-get($breakpoints, 'medium')})" !default;
+
+body:before {
+	display: none;
+	font-family: 'xs';
+	@media #{$small} {
+		font-family: 'small';
+	}
+	@media #{$medium} {
+		font-family: 'medium';
+	}
+	@media #{$large} {
+		font-family: 'large';
+	}
+	@media #{$xl} {
+		font-family: 'xl';
+	}
+}

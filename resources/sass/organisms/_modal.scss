@@ -1,0 +1,27 @@
+%modal {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.8);
+	@include flex(row, center, center, nowrap);
+	opacity: 0;
+	transition: $transition;
+	pointer-events: none;
+	&--visible {
+		pointer-events: auto;
+		opacity: 1;
+	}
+	&__container {
+		background-color: color(back-sec);
+		position: relative;
+		padding: 1rem;
+		max-height: 100vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+		@media #{$medium} {
+			padding: 2rem;
+		}
+	}
+}

@@ -1,0 +1,1 @@
+<svg class="icon icon--menu icon--desktop" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 60 35" width="60px" height="35px"><path d=" M 0 0 L 60 0 L 60 7 L 0 7 L 0 0 Z "/><path d=" M 0 14 L 60 14 L 60 21 L 0 21 L 0 14 Z "/><path d=" M 0 28 L 60 28 L 60 35 L 0 35 L 0 28 Z "/></svg>

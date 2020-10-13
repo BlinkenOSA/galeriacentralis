@@ -1,0 +1,50 @@
+%title,
+%subtitle {
+	font-weight: $bold;
+}
+
+%title {
+	font-size: 3.125rem;
+	line-height: 1.12;
+}
+
+%subtitle {
+	font-family: #{$heading-font-family};
+	font-size: 2.1875rem;
+}
+
+%menu-title,
+%menu-subtitle {
+	font-weight: 700;
+}
+
+%menu-title {
+	font-size: 2.875rem;
+	line-height: 1;
+	display: block;
+	padding-bottom: 0.6875rem;
+	// cursor: pointer;
+}
+
+%menu-subtitle {
+	font-size: 2.125rem;
+	font-family: #{$heading-font-family};
+	display: block;
+	line-height: 1;
+}
+
+%index-title {
+	font-size: 1.25rem;
+	line-height: 1.2;
+	font-weight: $bold;
+	@media #{$large} {
+		line-height: 1;
+		font-size: 2.1875rem;
+	}
+}
+
+%index-subtitle {
+	font-family: #{$heading-font-family};
+	font-size: 1.3125rem;
+	line-height: 1.1;
+}

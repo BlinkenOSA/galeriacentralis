@@ -1,0 +1,38 @@
+%editor {
+	// h2, h3 {
+	// 	margin: $margin 0 0.9*$margin 0;
+	// }
+	// h2 {
+	// 	@extend %title;
+	// }
+	// h3 {
+	// 	@extend %subtitle;
+	// }
+	p {
+		margin-bottom: 1rem;
+	}
+	a {
+		text-decoration: underline;
+		// color: color(link);
+		&:hover {
+			color: color(hover);
+		}
+	}
+	ol {
+		list-style-type: decimal;
+	}
+	ul {
+		list-style-type: disc;
+	}
+	ol, ul {
+		list-style-position: outside;
+		padding: 0 1.25rem;
+		margin: 1rem 0;
+		p {
+			margin: 0;
+		}
+	}
+	li {
+		margin: 0.75rem 0;
+	}
+}

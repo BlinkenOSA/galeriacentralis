@@ -1,0 +1,1 @@
+<svg class="icon icon--down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 60 39"><path d=" M 22 39 L 0 8 L 12 0 L 29 25 L 31 25 L 48 0 L 60 8 L 38 39 L 22 39 Z "/></svg>

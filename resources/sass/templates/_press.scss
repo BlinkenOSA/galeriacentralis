@@ -1,0 +1,89 @@
+.press {
+	margin-bottom: 3rem;
+	@extend %container;
+	@media #{$large} {
+		margin-bottom: 5rem;
+		font-size: 1.25rem;
+	}
+	&__event {
+		@include flex(row, flex-start, flex-start, wrap);
+		position: relative;
+		margin: 1.25rem 0;
+		&:after {
+			display: block;
+			width: 101vw;
+			position: absolute;
+			left: 0;
+			margin-left: -5vw;
+			bottom: 0;
+			height: 4px;
+			background-color: color(black);
+			content: ' ';
+			@media #{$large} {
+				margin-left: -6.5vw;
+			}
+			@media #{$xl} {
+				margin-left: -7.5vw;
+			}
+			@media (min-width:#{map-get($breakpoints, 'content-width') * 100 / 85}) {
+				margin-left: calc(-0.5 * (100vw - #{map-get($breakpoints, 'content-width')}));
+			}
+		}
+		&:last-of-type:after {
+			display: none;
+		}
+	}
+	&__titles {
+		width: 66.66%;
+		order: 1;
+		padding-right: 0.75rem;
+	}
+	&__titles,
+	&__items {
+		@media #{$large} {
+			width: 41.66%;
+		}
+	}
+	&__dates {
+		width: 33.33%;
+		font-size: 0.9375rem;
+		font-weight: $bold;
+		line-height: 1.25;
+		order: 2;
+		@media #{$medium} {
+			font-size: 1rem;
+		}
+		@media #{$large} {
+			order: 4;
+			width: 16.66%;
+		}
+	}
+	&__title {
+		@extend %title;
+		margin-top: 0.5rem;
+		margin-bottom: 1rem;
+		@media #{$large} {
+			margin-top: 1.875rem;
+			margin-bottom: 4rem;
+		}
+	}
+	&__subtitle {
+		font-size: 1.25rem;
+		font-weight: $bold;
+		line-height: 1.2;
+		margin-bottom: 0.125rem;
+		@media #{$large} {
+			font-size: 2.1875rem;
+			line-height: 1;
+		}
+	}
+	&__description {
+		font-family: #{$heading-font-family};
+		font-size: 1.3125rem;
+		font-weight: $semibold;
+		line-height: 1.095;
+	}
+	&__items {
+		order: 3;
+	}
+}

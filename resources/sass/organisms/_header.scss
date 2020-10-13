@@ -1,0 +1,139 @@
+.header {
+	color: color(white);
+	position: relative;
+	&__top {
+		@include container(padding);
+		@include flex(row, space-between, center, nowrap);
+		position: relative;
+		z-index: 1040;
+		background-color: color(black);
+		padding-top: 1.125rem;
+		padding-bottom: 1.125rem;
+	}
+	&__langs {
+		@extend %langs;
+		order: 5;
+		@media #{$large} {
+			order: 1;
+		}
+	}
+	&__lang {
+		@extend %langs__lang;
+		&:first-of-type.header__lang--inactive {
+			padding-right: 0.25rem;
+		}
+		&:last-of-type.header__lang--inactive {
+			padding-left: 0.25rem;
+		}
+		&--active {
+			@extend %langs__lang--active;
+		}
+	}
+	&__lang-text {
+		@extend %langs__lang-text;
+	}
+	.logo--short {
+		display: none;
+	}
+	.logo--long {
+		display: block;
+	}
+	.icon--desktop {
+		@media #{$medium-down} {
+			display: none;
+		}
+	}
+	.icon--mobile {
+		@media #{$large} {
+			display: none;
+		}
+	}
+	.icon--menu {
+		height: auto;
+		transform-origin: right;
+		transition: transform $transition;
+	}
+	&__navs {
+		transition: transform $transition;
+		background-color: color(black);
+		width: 100%;
+		@include flex(row, flex-start, flex-start, wrap);
+		position: fixed;
+		top: 0;
+		left: 0;
+		transform: translateY(-100%);
+		padding-top: 76px;
+		@media #{$medium-down} {
+			height: 100vh;
+			overflow: auto;
+		}
+		@media #{$large} {
+			justify-content: flex-end;
+			align-items: stretch;
+			@include container(padding);
+			padding-top: 145px;
+			padding-bottom: 5rem;
+		}
+		&--visible {
+			transform: translateY(0);
+			z-index: 1020;
+		}
+	}
+	&__search,
+	&__social {
+		width: 45%;
+		margin-top: 1rem;
+	}
+	&__search {
+		order: 3;
+		margin-left: 5%;
+		text-align: left;
+		position: relative;
+		@media #{$large} {
+			margin-left: 0;
+			flex-grow: 1;
+		}
+		.icon {
+			height: 3.125rem;
+			@media #{$large} {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+			}
+		}
+	}
+	&__social {
+		order: 4;
+		@include flex(column, flex-start, flex-start, nowrap);
+		margin-right: 5%;
+		padding-left: 20%;
+		@media #{$large} {
+			margin-right: 0;
+			padding-left: 0;
+			width: 15%;
+		}
+		// @media #{$xl} {
+		// 	padding-left: 36%;
+		// }
+	}
+	&__social-item {
+		@extend %social-link;
+		display: block;
+	}
+	&--nav {
+		position: fixed;
+		.logo--short {
+			@media #{$medium-down} {
+				display: block;
+			}
+		}
+		.logo--long {
+			@media #{$medium-down} {
+				display: none;
+			}
+		}
+		.icon--menu {
+			transform: scaleX(2);
+		}
+	}
+}

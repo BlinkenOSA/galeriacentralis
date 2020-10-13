@@ -1,0 +1,46 @@
+.results {
+	width: 100%;
+	&__term {
+		@extend %title;
+		color: color(white);
+		padding-top: 0.5rem;
+		padding-bottom: 0.75rem;
+		@include container(padding);
+		background-color: color(black);
+	}
+	&__event {
+		@include container(padding);
+		padding-top: 0.875rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 4px solid color(black);
+		@media #{$large} {
+			padding-top: 0.5rem;
+			padding-bottom: 1.5rem;
+		}
+	}
+	&__link {
+		display: block;
+		@media #{$large} {
+			@include flex(row, flex-start, flex-start, nowrap);
+		}
+	}
+	&__title {
+		@extend %index-title;
+		@media #{$large} {
+			width: 41.66%;
+			padding-right: $gutter;
+		}
+	}
+	&__subtitle {
+		@extend %index-subtitle;
+		@media #{$medium-down} {
+			margin-top: 0.1875rem;
+		}
+		@media #{$large} {
+			width: 58.33%;
+			font-size: 2.1875rem;
+			padding-left: $gutter;
+			line-height: 1;
+		}
+	}
+}

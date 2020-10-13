@@ -1,0 +1,124 @@
+// Container
+@mixin container($type: 'margin', $base-width: 90%, $med-width: 90%, $large-width: 87.5%, $xl-width: 85%, $max-width: map-get($breakpoints, 'content-width')) {
+	@if $type == 'padding' {
+		padding-left: 0.5*(100% - $base-width);
+		padding-right: 0.5*(100% - $base-width);
+		@media #{$medium} {
+			padding-left: 0.5*(100% - $med-width);
+			padding-right: 0.5*(100% - $med-width);
+		}
+		@media #{$large} {
+			padding-left: 0.5*(100% - $large-width);
+			padding-right: 0.5*(100% - $large-width);
+		}
+		@media #{$xl} {
+			padding-left: 0.5*(100% - $xl-width);
+			padding-right: 0.5*(100% - $xl-width);
+		}
+		@media (min-width:#{$max-width * 100% / $xl-width}) {
+			padding-left: calc(0.5 * (100% - #{$max-width}));
+			padding-right: calc(0.5 * (100% - #{$max-width}));
+		}
+	} @else if $type == 'margin' {
+		width: $base-width;
+		@media #{$medium} {
+			width: $med-width;
+		}
+		@media #{$large} {
+			width: $large-width;
+		}
+		@media #{$xl} {
+			width: $xl-width;
+		}
+		margin-left: auto;
+		margin-right: auto;
+		max-width: $max-width;
+	}
+}
+
+@mixin left() {
+	width: calc(100% + 5vw);
+	margin-left: -5vw;
+	@media #{$large} {
+		width: calc(100% + 7vw);
+		margin-left: -6.5vw;
+	}
+	@media #{$xl} {
+		width: calc(100% + 7.5vw);
+		margin-left: -7.5vw;
+	}
+	@media (min-width:#{map-get($breakpoints, 'content-width') * 100 / 85}) {
+		width: calc(100% + 0.51 * (100vw - #{map-get($breakpoints, 'content-width')}));
+		margin-left: calc(-0.5 * (100vw - #{map-get($breakpoints, 'content-width')}));
+	}
+}
+
+@mixin right() {
+	width: calc(100% + 5vw);
+	margin-right: -5vw;
+	@media #{$large} {
+		width: calc(100% + 7vw);
+		margin-right: -6.25vw;
+	}
+	@media #{$xl} {
+		width: calc(100% + 7.5vw);
+		margin-right: -7.5vw;
+	}
+	@media (min-width:#{map-get($breakpoints, 'content-width') * 100 / 85}) {
+		width: calc(100% + 0.51 * (100vw - #{map-get($breakpoints, 'content-width')}));
+		margin-right: calc(-0.5 * (100vw - #{map-get($breakpoints, 'content-width')}));
+	}
+}
+
+%container {
+	@include container;
+}
+
+//Limited width container
+@mixin limit($width: 70%, $max-width: 0.7*map-get($breakpoints, 'content-width')) {
+	width: $width;
+	max-width: $max-width;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+//Flexbox
+@mixin flex($flex-direction: row, $justify-content: center, $align-items: stretch, $flex-wrap: nowrap, $align-content: flex-start){
+	display: flex;
+	flex-direction: $flex-direction;
+	justify-content: $justify-content;
+	align-items: $align-items;
+	flex-wrap: $flex-wrap;
+	// align-content: $align-content;
+}
+
+%image {
+	background-size: cover;
+	background-position: center;
+	padding: 50%;
+	display: flex;
+	background-repeat: no-repeat;
+}
+
+%overlay {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+}
+
+%gutter {
+	padding-left: $gutter;
+	padding-right: $gutter;
+}
+
+%pseudo {
+	content: " ";
+	position: absolute;
+	display: block;
+}

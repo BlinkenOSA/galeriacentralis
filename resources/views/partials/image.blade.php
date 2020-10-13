@@ -1,0 +1,1 @@
+<img class="{{ $classes }}" src="{{ $url }}" alt="{{ $alt }}"{{ $asyncAttrib ?? '' }} style="background-image: url({{ $url }});">

@@ -1,0 +1,9 @@
+%link {
+	text-decoration: underline;
+	color: color(link);
+	transition: color $transition;
+	font-weight: $bold;
+	&:hover {
+		color: lighten(color(link), 10%);
+	}
+}

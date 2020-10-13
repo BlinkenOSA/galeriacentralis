@@ -1,0 +1,190 @@
+@if $fluid-type-enabled {
+	$_fluid-type-difference: (map-get($fluid-type, 'fluid-large') - map-get($fluid-type, 'fluid-small'))/(map-get($fluid-type, 'fluid-small') * 0 + 1);
+	$_fluid-viewport-difference: (map-get($fluid-type, 'fluid-end') - map-get($fluid-type, 'fluid-start'))/(map-get($fluid-type, 'fluid-start') * 0 + 1);
+	html {
+		font-size: #{map-get($fluid-type, 'fluid-small')};
+	}
+	@media screen and (min-width: #{map-get($fluid-type, 'fluid-start')}) {
+		html {
+			font-size: $base-root;
+			font-size: calc(#{map-get($fluid-type, 'fluid-small')} + #{$_fluid-type-difference} * (100vw - #{map-get($fluid-type, 'fluid-start')}) / #{$_fluid-viewport-difference});
+		}
+	}
+	@media screen and (min-width: #{map-get($fluid-type, 'fluid-end')}) {
+		html {
+			font-size: #{map-get($fluid-type, 'fluid-large')};
+		}
+	}
+}
+@else {
+	html {
+		font-size: map-get($fonts, 'base-root');
+	}
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+	font-size: 1em; // Fix for elements inside headings not displaying properly.
+}
+
+html {
+	font-family: #{$font-family};
+	line-height: $line-height;
+	-webkit-text-size-adjust: 100%; // Prevent adjustments of font size after orientation changes in mobile.
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	overflow-x: hidden;
+	color: color(fore);
+	background-color: color(back);
+}
+
+// Correct display for Edge & Firefox.
+details {
+	display: block;
+}
+
+// Correct display in all browsers.
+summary {
+	display: list-item;
+}
+
+// Abbreviations
+abbr[title] {
+	border-bottom: none; // Remove bottom border in Firefox 39-.
+	text-decoration: underline dotted; // Opinionated style-fix for all browsers.
+}
+
+// Show overflow in Edge.
+input {
+	overflow: visible;
+}
+
+// Make images responsive by default.
+img {
+	width: 100%;
+	height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: $heading-line-height;
+	margin: 0;
+	font-weight: $normal;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	transition: color $transition;
+	text-decoration: none;
+	color: inherit;
+}
+
+button {
+	appearance: none;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+b, strong {
+	font-weight: $bold;
+}
+
+blockquote {  // Doesn't have a back color by default, can be added manually.
+	display: block;
+	font-size: 1.5rem;
+	line-height: 120%;
+	color: color(fore);
+	margin: $margin 0;
+	padding: 2px;
+	padding-left: 1rem;
+}
+
+ol, ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+small, sup, sub, figcaption {
+	font-size: map-get($fonts, 'small');
+}
+
+figure {
+	margin: 0;
+	width: 100%;
+}
+
+figcaption {
+	color: color(fore-sec);
+	font-style: italic;
+}
+
+table {
+	font-size: 1rem;
+	border: none;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th, td {
+	border-width: 0px 0px 1px 0px;
+	padding: 0.5rem 0;
+	border-style: solid;
+	border-color: color(border);
+}
+
+hr {
+	width: 100%;
+	margin: 0;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px 0 0 0;
+}
+
+sup, sub, code, kbd {
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: $sup-top;
+}
+
+sub {
+	bottom: $sub-bottom;
+}
+
+code, kbd, pre, samp {
+	font-family: $code-font-family;     // Display fix should be applied manually!
+	font-size: map-get($fonts, 'code');
+}
+
+code { // No border color by default and fore color is the default for text, can be altered manually.
+	background: color(back-sec);
+	// This could be a bit counterintuitive and burden the codebase a bit, look into it again?
+	padding: $padding/4 $padding/2;
+}
+
+kbd { // No border color by default, can be altered manually.
+	background: color(fore);
+	color: color(back);
+	padding: $padding/4 $padding/2;
+}
+
+pre { // Fore color is the default, can be altered manually.
+	overflow: auto; // Responsiveness
+	background: color(back-sec);
+	padding: 1.5 * $padding;
+	margin: $margin;
+}

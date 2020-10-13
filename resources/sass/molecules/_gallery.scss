@@ -1,0 +1,140 @@
+.gallery {
+	position: relative;
+	@media #{$large} {
+		width: 66.66%;
+		padding-right: $gutter;
+
+		// padding-right: $gutter;
+	}
+	&--show {
+		@media #{$medium-down} {
+			display: none;
+		}
+		.gallery__items {
+			@media (min-width:#{map-get($breakpoints, 'content-width') * 100 / 85}) {
+				width: 130%;
+				margin-left: -30%;
+			}
+		}
+	}
+	&__items {
+		height: 100%;
+		@media #{$medium-down} {
+			width: 100vw;
+			margin-left: -5vw;
+		}
+		// @include flex(row, flex-start, stretch, nowrap);
+		@media #{$large} {
+			@include left;
+			// height: 100%;
+		}
+		&--early {
+			.gallery__figure {
+				height: 0;
+				// position: absolute;
+				// top: 0;
+			}
+		}
+	}
+	&__figure {
+		position: relative;
+		z-index: 1000;
+		// &:first-of-type {
+		// 	position: relative;
+		// }
+	}
+	&__image {
+		// @extend %image;
+		padding: 37% 50%;
+		width: 100%;
+		// height: 100%;
+		display: flex;
+		background-size: cover;
+		background-position: center;
+	}
+	&__caption {
+		display: none;
+	}
+	&__meta,
+	&__nav {
+		position: absolute;
+		@media #{$large} {
+			right: -1rem;
+			transform: translateX(100%);
+		}
+	}
+	&__meta {
+		bottom: 0.5rem;
+		z-index: 1010;
+		font-weight: $bold;
+		span {
+			font-weight: $normal;
+		}
+	}
+	&__nav {
+		bottom: 0.75rem;
+		z-index: 1000;
+		@media #{$medium-down} {
+			width: 100%;
+			left: 0;
+			text-align: center;
+		}
+		@media #{$large} {
+			margin-bottom: 0.5rem;
+		}
+	}
+	&__nav-item {
+		width: 1.5rem;
+		height: 1.5rem;
+		margin: 0 0.3125rem;
+		
+		display: inline-block;
+		cursor: pointer;
+		border-radius: 0.75rem;
+
+		@media #{$medium-down} {
+			background-color: color(white);
+			&--active {
+				background-color: color(black);
+			}
+		}
+		@media #{$large} {
+			border: 5px solid color(black);
+			&--active {
+				background-color: color(black);
+			}
+		}
+	}
+	&--show {
+		.gallery__nav {
+			@media #{$large} {
+				bottom: 3rem;
+			}
+		}
+	}
+	&--frontpage {
+		@media #{$large} {
+			&:after {
+				position: absolute;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 0.625rem;
+				background-color: color(black);
+				display: block;
+				content: ' ';
+			}
+		}
+		.gallery__nav-item {
+			@media #{$large} {
+				border: 5px solid color(white);
+				&--active {
+					background-color: color(white);
+				}
+			}
+		}
+		.gallery__meta {
+			display: none;
+		}
+	}
+}

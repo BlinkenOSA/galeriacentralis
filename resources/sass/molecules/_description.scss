@@ -1,0 +1,31 @@
+.description {
+	display: none;
+	@extend %description;
+	position: relative;
+	&__container {
+		position: relative;
+		padding: $gutter;
+		@media #{$large} {
+			// @include right;
+			padding-left: $gutter;
+			height: 100%;
+		}
+		&--frontpage {
+			background-color: color(black);
+			color: color(white);
+		}
+	}
+	&__bg {
+		@media #{$large} {
+			@include right;
+			background-color: color(black);
+			position: absolute;
+			top: 0;
+			bottom: 0;
+		}
+	}
+	@media #{$large} {
+		display: block;
+		width: 33.33%;
+	}
+}

@@ -1,0 +1,13 @@
+%button {
+	background-color: color(fore-sec);
+	color: color(back);
+	text-transform: uppercase;
+	text-align: center;
+	padding: 0.5rem;
+	white-space: nowrap;
+	display: inline-block;
+	transition: background-color $transition;
+	&:hover {
+		background-color: lighten(color(fore), 10%);
+	}
+}

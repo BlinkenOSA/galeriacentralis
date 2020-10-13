@@ -1,0 +1,120 @@
+.info {
+	margin-bottom: 3rem;
+	@extend %container;
+	@media #{$large} {
+		margin-bottom: 5rem;
+		font-size: 1.25rem;
+	}
+	&__columns {
+		@include flex(column, flex-start, stretch, nowrap);
+		@media #{$large} {
+			flex-wrap: wrap;
+		}
+	}
+	&__datas,
+	&__impressum,
+	&__about,
+	&__placeholder {
+		width: 100%;
+		@media #{$large} {
+			width: 50%;
+		}
+	}
+	&__placeholder {
+		display: none;
+		@media #{$large} {
+			display: block;
+			order: 2;
+		}
+	}
+	&__datas {
+		order: 3;
+		@media #{$large} {
+			order: 1;
+		}
+	}
+	&__impressum {
+		order: 4;
+	}
+	&__about {
+		order: 1;
+		@media #{$large} {
+			order: 3;
+		}
+	}
+	&__title {
+		@extend %title;
+		margin-top: 0.5rem;
+		margin-bottom: 1rem;
+		@media #{$large} {
+			margin-top: 1.875rem;
+			margin-bottom: 4rem;
+		}
+	}
+	&__row {
+		@include flex(row, flex-start, flex-start, nowrap);
+		padding-top: 0.5rem;
+		padding-bottom: 0.875rem;
+		position: relative;
+		&:before {
+			content: ' ';
+			display: block;
+			position: absolute;
+			top: 0;
+			height: 4px;
+			background-color: color(black);
+			@media #{$medium-down} {
+				width: 100vw;
+				left: -5vw;
+			}
+		}
+		&--left {
+			&:before {
+				@media #{$large} {
+					@include left;
+					right: $gutter;
+				}
+			}
+			.info__label {
+				padding-left: 0;
+			}
+		}
+		&--right {
+			&:before {
+				@media #{$large} {
+					// padding-left: 0;
+					@include right;
+					left: $gutter;
+				}
+			}
+			.info__value {
+				padding-right: 0;
+			}
+		}
+	}
+	&__label,
+	&__value {
+		@media #{$large} {
+			padding-left: $gutter;
+			padding-right: $gutter;
+		}
+	}
+	&__label {
+		font-weight: $bold;
+		width: 33.33%;
+	}
+	&__value {
+		width: 66.66%;
+		a {
+			text-decoration: underline;
+		}
+		&--about,
+		&--impressum {
+			@extend %editor;
+			p:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+}

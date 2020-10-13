@@ -1,0 +1,56 @@
+.scope {
+	width: 100%;
+	background-color: color(silver);
+	flex-grow: 1;
+	@include flex(column, center, center, nowrap);
+	@media #{$large} {
+		@include flex(row, space-between, stretch, nowrap);
+		background-color: color(black);
+		position: relative;
+		&:before {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			content: ' ';
+			background-color: color(silver);
+			border-radius: 6vw;
+			overflow: hidden;
+		}
+	}
+	@media #{$large} and (orientation: portrait) {
+		justify-content: center;
+	}
+	&__svg {
+		height: 100%;
+		position: relative;
+		@media #{$medium-down} {
+			display: none;
+		}
+		&--mobile {
+			display: block;
+			width: 100%;
+			height: auto;
+			@media #{$large} {
+				display: none;
+			}
+		}
+		&--left,
+		&--right {
+			@media #{$large} and (orientation: portrait) {
+				display: none;
+			}
+			@media #{$large} {
+				max-width: 20%;
+			}
+		}
+		&--mid,
+		&--left,
+		&--right {
+			@media #{$large} {
+				flex-grow: 1;
+			}
+		}
+	}
+}

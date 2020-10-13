@@ -1,0 +1,28 @@
+.press-item {
+	margin: 1.25rem 0;
+	@media #{$large} {
+		margin-top: 0;
+	}
+	&__title,
+	&__subtitle {
+		font-size: 1.25rem;
+		line-height: 1.2;
+	}
+	&__title {
+		margin-bottom: 0.125rem;
+		font-weight: $bold;
+	}
+	&__link {
+		text-decoration: underline;
+	}
+	&__file {
+		font-weight: $bold;
+		display: inline-block;
+		line-height: 1.25;
+		background-color: color(black);
+		border-radius: 1rem;
+		color: color(white);
+		padding: 0 0.625rem;
+		margin-top: 0.25rem;
+	}
+}

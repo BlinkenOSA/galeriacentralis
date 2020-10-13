@@ -1,0 +1,38 @@
+.search {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: color(black);
+	opacity: 0;
+	pointer-events: none;
+	z-index: 1030;
+	transition: opacity $transition;
+	@include flex(column, center, center, nowrap);
+	&--visible {
+		opacity: 1;
+		pointer-events: auto;
+	}
+	&__form {
+		@extend %container;
+		@include flex(column, center, center, nowrap);
+		margin-top: 3rem;
+	}
+	&__input {
+		width: 750px;
+		max-width: 100%;
+		background-color: color(transparent);
+		border-width: 0 0 4px 0;
+		border-style: solid;
+		border-color: color(white);
+		font-size: 2.1875rem;
+		font-family: #{$heading-font-family};
+		color: color(white);
+		outline: none;
+	}
+	&__button {
+		@extend %social-link;
+		margin-top: 3rem;
+	}
+}

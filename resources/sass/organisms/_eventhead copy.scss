@@ -1,0 +1,93 @@
+.eventhead {
+	width: 100%;
+	@media #{$large} {
+		@include flex(row, flex-start, stretch, nowrap);
+	}
+	&__column {
+		@include flex(row, space-between, center, wrap);
+		&--title {
+			@media #{$large} {
+				width: 66.66%;
+				padding-right: $gutter;
+			}
+		}
+		&--dates {
+			@media #{$large} {
+				width: 33.33%;
+				flex-direction: column-reverse;
+				align-items: flex-start;
+				justify-content: flex-end;
+				padding-left: $gutter;
+			}
+		}
+	}
+	&__title {
+		@extend %title;
+		padding-top: 0.5rem;
+		padding-bottom: 0.75rem;
+		padding-right: 5%;
+		@extend %padding-left;
+		border-bottom: 7px solid color(black);
+		@media #{$large} {
+			padding-right: 1rem;
+			padding-top: 1.875rem;
+			padding-bottom: 1.25rem;
+		}
+	}
+	&__subtitle {
+		@extend %subtitle;
+		padding-top: 0.3125rem;
+		padding-bottom: 0.125rem;
+		padding-right: 5%;
+		@extend %padding-left;
+		@media #{$large} {
+			padding-right: 0.5rem;
+			padding-bottom: 2.375rem;
+		}
+	}
+	&__title,
+	&__subtitle {
+		width: 100%;
+	}
+	&__onshow {
+		@extend %social-link;
+		background-color: color(black);
+		color: color(white);
+		@media #{$medium-down} {
+			margin-left: 5%;
+		}
+	}
+	&__dates {
+		padding: 0.625rem 5% 0.625rem 0;
+		margin: 0.5rem 0;
+		font-weight: $bold;
+		@media #{$medium-down} {
+			width: 50%;
+			border-top: 7px solid color(black);
+		}
+		@media #{$large} {
+			font-size: 1.25rem;
+			margin-top: 1.875rem;
+		}
+	}
+	&__date {
+		display: block;
+	}
+	&--frontpage {
+		@media #{$large} {
+			background-color: color(white) !important;
+		}
+		.eventhead__onshow {
+			@media #{$large} {
+				background-color: color(white);
+				color: color(black);
+			}
+		}
+		.eventhead__column--dates {
+			@media #{$large} {
+				color: color(white);
+				background-color: color(black);
+			}
+		}
+	}
+}

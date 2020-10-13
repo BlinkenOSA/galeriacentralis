@@ -1,0 +1,18 @@
+.message {
+	@extend %modal;
+	height: 100%;
+	top: 0;
+	background-color: rgba(0,0,0,0.6);
+	opacity: 0;
+	pointer-events: none;
+	text-align: center;
+	z-index: 1090;
+	overflow: scroll;
+	@include flex(row, center, center, nowrap);
+	&--visible {
+		@extend %modal--visible;
+	}
+	&__container {
+		@extend %modal__container;
+	}
+}

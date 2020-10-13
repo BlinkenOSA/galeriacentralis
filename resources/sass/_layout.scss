@@ -1,0 +1,75 @@
+body {
+	&.noscroll {
+		&,
+		.wrapper {
+			overflow: hidden;
+			position: fixed;
+		}
+	}
+}
+
+.wrapper {
+	overflow: hidden;
+	min-height: 100vh;
+	position: relative;
+	width: 100%;
+	@include flex(column, flex-start, stretch, nowrap);
+	z-index: 1000;
+	&--empty {
+		.main {
+			flex-grow: 1;
+			@include flex(column, flex-start, stretch, nowrap);
+			@media #{$large} {
+				@include flex(row, center, stretch, nowrap);
+				height: 100vh;
+				position: fixed;
+				padding-top: 79px;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+		}
+	}
+	&--full,
+	&--frontpage {
+		.main {
+			@include flex(column, flex-start, stretch, wrap);
+			flex-grow: 1;
+		}
+		.container {
+			flex-grow: 1;
+			@media #{$large} {
+				flex-wrap: nowrap;
+			}
+		}
+	}
+	&--nav {
+		.main {
+			padding-top: 79px;
+		}
+	}
+}
+
+.container {
+	@extend %container;
+	@include flex(row, flex-start, stretch, wrap);
+}
+
+.header,
+.footer {
+	position: relative;
+	width: 100%;
+	width: 100vw;
+	max-width: 100%;
+}
+
+.main {
+	z-index: 1000;
+}
+
+.header {
+	z-index: 1020;
+}
+.footer {
+	z-index: 1010;
+}

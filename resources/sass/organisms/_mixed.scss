@@ -1,0 +1,30 @@
+.mixed {
+	margin: $margin 0;
+	@media #{$small-down} {
+		@include flex(column, flex-start, stretch, nowrap);
+	}
+	&--reverse {
+		flex-direction: column-reverse;
+		.mixed__figure {
+			@media #{$medium} {
+				float: right;
+				padding-left: 2*$gutter;
+				padding-right: 0;
+			}
+		}
+	}
+	&__text {
+		@extend %editor;
+	}
+	&__figure {
+		@media #{$medium} {
+			width: 52.5%;
+			float: left;
+			padding-right: 2*$gutter;
+			padding-bottom: $gutter;
+		}
+	}
+	&__clear {
+		clear: both;
+	}
+}
