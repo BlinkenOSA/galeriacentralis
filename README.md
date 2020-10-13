@@ -1,0 +1,2 @@
+# galeriacentralis
+Galeria Centralis website
