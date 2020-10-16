@@ -82,8 +82,14 @@
 	])
 
 	@formField('input', [
+		'name' => 'metatitle',
+		'label' => 'Default meta title',
+		'translated' => true
+	])
+
+	@formField('input', [
 		'type' => 'textarea',
-		'name' => 'description',
+		'name' => 'metadescription',
 		'label' => 'Default meta description',
 		'translated' => true
 	])

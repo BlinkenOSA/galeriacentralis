@@ -14,7 +14,7 @@ class OptionRepository extends ModuleRepository
 	use HandleTranslations, HandleSlugs, HandleMedias, HandleBrowsers;
 
 	protected $fieldsGroups = [
-		'options' => ['instagram', 'facebook', 'twitter', 'youtube', 'phone', 'fax', 'email', 'hours', 'address', 'programs', 'about', 'maintenance', 'impressum', 'description']
+		'options' => ['instagram', 'facebook', 'twitter', 'youtube', 'phone', 'fax', 'email', 'hours', 'address', 'programs', 'about', 'maintenance', 'impressum', 'metatitle', 'metadescription']
 	];
 
 	protected $relatedBrowsers = [];
