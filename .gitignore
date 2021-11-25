@@ -1,2 +1,5 @@
 public/fonts
 resources/fonts
+.env
+.idea
+vendor
