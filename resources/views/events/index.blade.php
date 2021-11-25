@@ -10,17 +10,25 @@
 			@php
 				$current = now()->format('Y');
 				$filter = request()->query('filter');
-				if ($filter == __('strings.future_slug')) {
-					$isVisible = $current < $year;
-				} else if ($filter == __('strings.past_slug')) {
-					$isVisible = $current > $year;
-				} else if ($filter == __('strings.present_slug')) {
-					$isVisible = $current == $year;
-				// } else if ($filter == __('strings.virtual_slug')) {
-				// 	$isVisible = false;
-				} else {
-					$isVisible = false;
+
+				switch ($filter) {
+					case __('strings.future_slug'):
+						$isVisible = $current < $year;
+						break;
+					case __('strings.past_slug'):
+						$isVisible = $current > $year;
+						break;
+					case __('strings.present_slug'):
+						$isVisible = $current == $year;
+						break;
+					case __('strings.virtual_slug'):
+						$isVisible = true;
+						break;
+					default:
+						$isVisible = false;	
+						break;
 				}
+
 			@endphp
 			<div class="events__year{{ $isVisible ? ' events__year--visible' : '' }}">
 				<button class="events__toggle">{{ $year }}@include('icons.down')</button>
