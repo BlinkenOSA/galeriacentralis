@@ -32,7 +32,6 @@ if ($('.events__toggle')) {
     window.addEventListener('load', e => {
       for (let i = 0; i < visibleYears.length; i++) {
         const year = visibleYears[i];
-        console.log(year.lastElementChild.firstElementChild.offsetHeight);
         year.lastElementChild.style.height = year.lastElementChild.firstElementChild.offsetHeight + 'px';
       }
     });
@@ -53,7 +52,6 @@ if ($('.info')) {
     let placeholder = $('.info__placeholder');
 
     self.calcHeight = () => {
-      console.log(breakPoint.get());
       if (window.getComputedStyle(about).order == 3) {
         let rightHeight = about.offsetHeight + impressum.offsetHeight;
         let leftHeight = datas.offsetHeight;
