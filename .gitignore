@@ -1,5 +1,6 @@
-public/fonts
+public
 resources/fonts
 .env
 .idea
 vendor
+node_modules
