@@ -61,10 +61,20 @@ class Event extends Model
 		return $this->hasMany('App\Models\PressItem');
 	}
 
+	public function scopePast($query)
+	{
+		return $query->whereDate('end', '<', now());
+	}
+
 	public function scopeCurrent($query)
 	{
 		$now = now();
 		return $query->whereDate('start', '<=', $now)->whereDate('end', '>=', $now);
+	}
+
+	public function scopeFuture($query)
+	{
+		return $query->whereDate('start', '>', now());
 	}
 
 	public function scopeVirtual($query)
@@ -85,11 +95,6 @@ class Event extends Model
 	public function scopeStandard($query)
 	{
 		return $query->where('series', '!=', 1)->orWhereNull('series');
-	}
-
-	public function scopeFuture($query)
-	{
-		return $query->whereDate('start', '>', now());
 	}
 
 	public function getPeriodAttribute()

@@ -60,11 +60,25 @@ class EventController extends Controller
 		if (Auth::guard('twill_users')->check() == false) {
 			$events = $events->publishedInListings();
 		}
-		if ($request->query('filter') == 'virtual') {
-			$events = $events->virtual();
-		} else {
-			$events = $events->physical();
+
+		switch ($request->query('filter')) {
+			case __('strings.virtual_slug'):
+				$events = $events->virtual();
+				break;
+			case __('strings.past_slug'):
+				$events = $events->past();
+				break;
+			case __('strings.future_slug'):
+				$events = $events->future();
+				break;
+			case __('strings.present_slug'):
+				$events = $events->current();
+				break;
+			default:
+				$events = $events->physical();
+				break;
 		}
+		
 		$meta = $this->getMeta(null);
 		$meta['title'] = Category::forSlug($category)->first()->title;
 		$events = $events->get()->groupBy(function($item) {

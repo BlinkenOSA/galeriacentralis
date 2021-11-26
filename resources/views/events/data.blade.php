@@ -103,10 +103,12 @@
 			<div class="data__value data__value--description">
 				<div class="data__description">{!! $event->description !!}</div>
 			</div>
+			<!--
 			<figure class="data__figure">
 				{!! $event->renderImage('data__image', 'medium', 'images') !!}
 				<figcaption class="data__caption"><strong>{{ $event->imageCaption('images') }}</strong>{!! !empty($event->imageObject('images')->credit) ? "<br/>- {$event->imageObject('images')->credit}" : '' !!}</figcaption>
 			</figure>
+			-->
 			<div class="data__placeholder"></div>
 			<div class="data__value">
 				{!! $event->summary !!}
