@@ -8,7 +8,7 @@
 		<link rel="canonical" href="{{ request()->getSchemeAndHttpHost() . request()->getRequestUri() }}">
 		<meta name="robots" content="{{ config('app.env') != 'production' ? 'noindex,nofollow' : 'index,follow' }}">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		
+
 		<meta property="og:title" content="{{ $meta['title'] ?? config('meta.title') }} - {{ config('app.name') }}" />
 		<meta property="og:description" content="{{ $meta['description'] ?? config('meta.description') }}" />
 		<meta property="og:type" content="{{ !empty($meta['type']) ? $meta['type'] : 'article' }}" />
@@ -19,7 +19,7 @@
 
 		@include('partials.favicon')
 
-		<link rel="stylesheet" href="{{ secure_asset('css/style.css') . (config('app.env') != 'production' ? '?' . 'now'|date('c') : '?' . config('app.version')) }}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{{ asset('css/style.css') . (config('app.env') != 'production' ? '?' . 'now'|date('c') : '?' . config('app.version')) }}" type="text/css" media="screen" />
 	</head>
 	<body id="body" class="{{ !$cookies['accepted'] ? 'noscroll' : '' }}">
 		@yield('page')
@@ -28,6 +28,6 @@
 			window.STORE = {};
 			@stack('store')
 		</script> --}}
-		<script src="{{ secure_asset('js/scripts.js') . (config('app.env') != 'production' ? '?' . date('c') : '?' . config('app.version')) }}" defer></script>
+		<script src="{{ asset('js/scripts.js') . (config('app.env') != 'production' ? '?' . date('c') : '?' . config('app.version')) }}" defer></script>
 	</body>
 </html>
