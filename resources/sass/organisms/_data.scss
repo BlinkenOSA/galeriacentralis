@@ -59,6 +59,9 @@
 		a {
 			text-decoration: underline;
 		}
+		a.row_link {
+			display: block;
+		}
 	}
 	&__label,
 	&__value {
