@@ -57,6 +57,7 @@
 				<div class="data__value">{!! $event->press !!}</div>
 			</div>
 		@endif
+
 		@if (!empty($related['exhibitions']))
 			<div class="data__row data__row--left">
 				<label class="data__label">{{ __('strings.related_exhibitions') }}</label>
@@ -70,6 +71,20 @@
 				</div>
 			</div>
 		@endif
+		@if (!empty($related['kiallitas']))
+            <div class="data__row data__row--left">
+                <label class="data__label">{{ __('strings.related_exhibitions') }}</label>
+                <div class="data__value">
+                    @foreach ($related['kiallitas'] as $relatedEvent)
+                        <a class="row_link" href="{{ route("{$lang}.events.show", [
+                            'slug' => $relatedEvent->slug,
+                            'category' => 'kiallitas',
+                        ]) }}">{{ $relatedEvent->title }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
 		@if (!empty($related['events']))
 			<div class="data__row data__row--left">
 				<label class="data__label">{{ __('strings.related_events') }}</label>
@@ -83,6 +98,20 @@
 				</div>
 			</div>
 		@endif
+        @if (!empty($related['esemeny']))
+            <div class="data__row data__row--left">
+                <label class="data__label">{{ __('strings.related_events') }}</label>
+                <div class="data__value">
+                    @foreach ($related['esemeny'] as $relatedEvent)
+                        <a class="row_link" href="{{ route("{$lang}.events.show", [
+                            'slug' => $relatedEvent->slug,
+                            'category' => 'esemeny',
+                        ]) }}">{{ $relatedEvent->title }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
 		@if (!empty($related['education']))
 			<div class="data__row data__row--left">
 				<label class="data__label">{{ __('strings.related_edu') }}</label>
@@ -96,6 +125,20 @@
 				</div>
 			</div>
 		@endif
+        @if (!empty($related['oktatas']))
+            <div class="data__row data__row--left">
+                <label class="data__label">{{ __('strings.related_edu') }}</label>
+                <div class="data__value">
+                    @foreach ($related['oktatas'] as $relatedEvent)
+                        <a href="{{ route("{$lang}.events.show", [
+                            'slug' => $relatedEvent->slug,
+                            'category' => 'oktatas',
+                        ]) }}">{{ $relatedEvent->title }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
 	</div>
 	<div class="data__summary">
 		<div class="data__row data__row--right">
