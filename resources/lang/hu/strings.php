@@ -16,7 +16,7 @@ return [
 	'construction' => 'Feltöltés alatt',
 	'type' => 'Típus',
 	'genre' => 'Műfaj',
-	'series' => 'Sorzyat',
+	'series' => 'Sorozat',
 	'curator' => 'Kurátor',
 	'artists' => 'Művészek',
 	'coop' => 'Együttműködők',
