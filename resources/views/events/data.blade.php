@@ -117,7 +117,7 @@
 				<label class="data__label">{{ __('strings.related_edu') }}</label>
 				<div class="data__value">
 					@foreach ($related['education'] as $relatedEvent)
-						<a href="{{ route("{$lang}.events.show", [
+						<a class="row_link" href="{{ route("{$lang}.events.show", [
 							'slug' => $relatedEvent->slug,
 							'category' => 'education',
 						]) }}">{{ $relatedEvent->title }}</a>
@@ -130,7 +130,7 @@
                 <label class="data__label">{{ __('strings.related_edu') }}</label>
                 <div class="data__value">
                     @foreach ($related['oktatas'] as $relatedEvent)
-                        <a href="{{ route("{$lang}.events.show", [
+                        <a class="row_link" href="{{ route("{$lang}.events.show", [
                             'slug' => $relatedEvent->slug,
                             'category' => 'oktatas',
                         ]) }}">{{ $relatedEvent->title }}</a>
