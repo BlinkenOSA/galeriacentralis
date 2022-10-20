@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
 	use HandleMeta;
-	
+
 	public function show($category, $slug, Request $request)
 	{
 		$locale = app()->getLocale();
@@ -41,6 +41,7 @@ class EventController extends Controller
 		$related = Event::standard()->withTag(implode(', ', $tags))->get()->groupBy(function($item) {
 			return $item->categories->first()->slug;
 		});
+
 		$series = $event->series ? collect([]) : Event::series()->withActiveTranslations()->withTag(implode(', ', $tags))->get();
 		return view('events.show', [
 			'event' => $event,
@@ -53,7 +54,7 @@ class EventController extends Controller
 
 	public function index($category, Request $request)
 	{
-		
+
 		$events = Event::withActiveTranslations()->standard()->with(['slugs'])->whereHas('categories.slugs', function($query) use ($category) {
 			$query->where('slug', '=', $category);
 		})->orderBy('start', 'desc');
@@ -78,7 +79,7 @@ class EventController extends Controller
 				$events = $events->physical();
 				break;
 		}
-		
+
 		$meta = $this->getMeta(null);
 		$meta['title'] = Category::forSlug($category)->first()->title;
 		$events = $events->get()->groupBy(function($item) {
