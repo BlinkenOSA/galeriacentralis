@@ -36,7 +36,7 @@ class Event extends Model
 		'monoscope'
 	];
 
-	protected $dates = ['start', 'end'];
+	protected $casts = ['start' => 'datetime', 'end' => 'datetime'];
 
 	public $translatedAttributes = [
 		'title',

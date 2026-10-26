@@ -3,6 +3,7 @@
 @twillBlockComponent('a17-block-text')
 
 @formField('wysiwyg', [
+    'type' => 'quill',
 	'name' => 'body',
 	'label' => 'Szöveges tartalom',
 	'toolbarOptions' => config('twill.toolbarConfig'),

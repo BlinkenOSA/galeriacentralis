@@ -19,7 +19,7 @@ class EventRepository extends ModuleRepository
 		]
 	];
 
-	public $repeaters = [
+	public array $repeaters = [
 		'press_items'
 	];
 

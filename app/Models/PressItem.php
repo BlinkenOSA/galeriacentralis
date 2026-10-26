@@ -9,7 +9,7 @@ class PressItem extends Model
 {
     use HasFiles;
 
-	protected $dates = ['date'];
+	protected $casts = ['date' => 'datetime'];
 
     protected $fillable = [
         'published',

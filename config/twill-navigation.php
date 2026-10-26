@@ -3,7 +3,7 @@
 return [
 	'events' => [
 		'title' => 'Events',
-		'route' => 'admin.events.events.index',
+		'route' => 'twill.events.events.index',
 		'primary_navigation' => [
 			'events' => [
 				'title' => 'Events',
@@ -17,15 +17,15 @@ return [
 	],
 	// 'content' => [
 	// 	'title' => 'Pages',
-	// 	'route' => 'admin.content.pages.index',
+	// 	'route' => 'twill.content.pages.index',
 	// ],
 	// 'navigation' => [
 	// 	'title' => 'Navigáció',
-	// 	'route' => 'admin.navigations.index',
+	// 	'route' => 'twill.navigations.index',
 	// ],
 	'options' => [
 		'title' => 'Options',
-		'route' => 'admin.options.show',
+		'route' => 'twill.options.show',
 		'params' => ['option' => 1]
 	],
 ];

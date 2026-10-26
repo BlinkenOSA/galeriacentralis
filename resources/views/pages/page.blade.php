@@ -2,6 +2,6 @@
 
 @section('content')
 	<section class="page">
-		{!! $page->renderBlocks(false) !!}
+		{!! $page->renderBlocks() !!}
 	</section>
 @endsection

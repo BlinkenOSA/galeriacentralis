@@ -14,7 +14,8 @@ else if (process.env.NODE_ENV == 'production') {
     });
 }
 
-mix.js('resources/js/scripts.js', 'js')
+mix.setPublicPath('public')
+    .js('resources/js/scripts.js', 'js')
     .sass('resources/sass/style.scss', 'css').options({
     })
     .copyDirectory('resources/images', 'public/images')

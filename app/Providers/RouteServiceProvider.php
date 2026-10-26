@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use App\Models\Category;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -31,14 +30,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-		$param = request()->segments()[0] ?? NULL;
-		$locale = !empty($param) && in_array($param, config('translatable.locales')) ? $param : config('translatable.fallback_locale');
-		$cats = Category::publishedInListings()->get()->map(function($cat) use ($locale) {
-			return $cat->getActiveSlug($locale)->slug;
-		})->push($locale == 'hu' ? 'series' : 'series')->toArray();
-		$constraint = implode('|', $cats);
-        Route::pattern('category', "({$constraint})");
-
         parent::boot();
     }
 

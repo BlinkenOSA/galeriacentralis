@@ -26,9 +26,21 @@ class FrontpageController extends Controller
 		$event = Event::current()->first();
 		if (empty($event)) {
 			$event = Event::future()->orderBy('start', 'asc')->first();
-			return view('frontpage.empty', [
-				'event' => $event
-			]);
+			if ($event) {
+				return view('frontpage.empty', ['event' => $event]);
+			}
+
+			$event = Event::publishedInListings()->past()
+				->whereHas('categories.slugs', function ($query) {
+					$query->where('slug', 'exhibitions')->where('locale', 'en');
+				})
+				->where(function ($query) {
+					$query->where('monoscope', 0)->orWhereNull('monoscope');
+				})
+				->orderByDesc('end')->orderByDesc('start')->orderByDesc('id')->first();
+			if (!$event) {
+				return view('frontpage.empty');
+			}
 		}
 		$meta = $this->getMeta(NULL);
 		return view('frontpage.event', [

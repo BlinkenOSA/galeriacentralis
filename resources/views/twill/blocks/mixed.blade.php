@@ -9,6 +9,7 @@
 ])
 
 @formField('wysiwyg', [
+    'type' => 'quill',
 	'name' => 'body',
 	'label' => 'Szöveges tartalom',
 	'toolbarOptions' => [

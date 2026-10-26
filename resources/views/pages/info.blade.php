@@ -28,15 +28,15 @@
 				</div>
 				<div class="info__row info__row--left">
 					<label class="info__label">{{ __('strings.phone') }}</label>
-					<span class="info__value"><a href="tel:{{ $options->fields['phone'] }}">{{ $options->fields['phone'] }}</a></span>
+					<span class="info__value"><a href="tel:{{ $options->fields['phone'] ?? '' }}">{{ $options->fields['phone'] ?? '' }}</a></span>
 				</div>
 				<div class="info__row info__row--left">
 					<label class="info__label">{{ __('strings.fax') }}</label>
-					<span class="info__value"><a href="fax:{{ $options->fields['fax'] }}">{{ $options->fields['phone'] }}</a></span>
+					<span class="info__value"><a href="fax:{{ $options->fields['fax'] ?? '' }}">{{ $options->fields['phone'] ?? '' }}</a></span>
 				</div>
 				<div class="info__row info__row--left">
 					<label class="info__label">{{ __('strings.email') }}</label>
-					<span class="info__value"><a href="mailto:{{ $options->fields['email'] }}">{{ $options->fields['email'] }}</a></span>
+					<span class="info__value"><a href="mailto:{{ $options->fields['email'] ?? '' }}">{{ $options->fields['email'] ?? '' }}</a></span>
 				</div>
 				<div class="info__row info__row--left">
 					<label class="info__label">{{ __('strings.programs') }}</label>

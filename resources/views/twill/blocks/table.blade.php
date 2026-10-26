@@ -3,6 +3,7 @@
 @twillBlockComponent('a17-block-table')
 
 @formField('wysiwyg', [
+    'type' => 'quill',
 	'name' => 'table',
 	'label' => 'Táblázat',
 	'type' => 'tiptap',

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Twill;
 
 use A17\Twill\Http\Requests\Admin\Request;
 
-class OptionRequest extends Request
+class PressItemRequest extends Request
 {
     public function rulesForCreate()
     {

@@ -16,6 +16,7 @@
 	])
 	
 	@formField('wysiwyg', [
+    'type' => 'quill',
         'name' => 'summary',
         'label' => 'Summary',
 		'translated' => true,
@@ -35,6 +36,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'artists',
 		'label' => 'Artists',
 		'editSource' => true,
@@ -42,6 +44,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'coop',
 		'label' => 'In cooperation with',
 		'editSource' => true,
@@ -49,6 +52,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'partners',
 		'label' => 'Partners',
 		'editSource' => true,
@@ -56,6 +60,7 @@
 	])
 
 	{{-- @formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'press',
 		'label' => 'Press',
 		'editSource' => true,

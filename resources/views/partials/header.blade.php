@@ -26,10 +26,11 @@
 			@include('partials.primary')
 			<button class="header__search">@include('icons.search')</button>
 			<div class="header__social">
-				<a href="{{ $options->fields['instagram'] }}" class="header__social-item" target="_blank">{{ __('Instagram') }}</a>
-				<a href="{{ $options->fields['facebook'] }}" class="header__social-item" target="_blank">{{ __('Facebook') }}</a>
-				<a href="{{ $options->fields['twitter'] }}" class="header__social-item" target="_blank">{{ __('Twitter') }}</a>
-				<a href="{{ $options->fields['youtube'] }}" class="header__social-item" target="_blank">{{ __('YouTube') }}</a>
+				@foreach (['instagram' => 'Instagram', 'facebook' => 'Facebook', 'twitter' => 'Twitter', 'youtube' => 'YouTube'] as $key => $label)
+					@if (!empty($options->fields[$key]))
+						<a href="{{ $options->fields[$key] }}" class="header__social-item" target="_blank">{{ __($label) }}</a>
+					@endif
+				@endforeach
 			</div>
 		</div>
 		@include('partials.search')

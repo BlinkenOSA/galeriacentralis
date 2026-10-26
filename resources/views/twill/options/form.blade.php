@@ -42,6 +42,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'hours',
 		'label' => 'Opening times',
 		'translated' => true,
@@ -50,6 +51,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'address',
 		'label' => 'Address',
 		'translated' => true,
@@ -58,6 +60,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'programs',
 		'label' => 'Public programs',
 		'translated' => true,
@@ -66,6 +69,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'about',
 		'label' => 'About us',
 		'translated' => true,
@@ -74,6 +78,7 @@
 	])
 
 	@formField('wysiwyg', [
+    'type' => 'quill',
 		'name' => 'impressum',
 		'label' => 'Imperssum',
 		'translated' => true,

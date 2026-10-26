@@ -6,6 +6,7 @@ use A17\Twill\Repositories\Behaviors\HandleBlocks;
 use A17\Twill\Repositories\Behaviors\HandleTranslations;
 use A17\Twill\Repositories\Behaviors\HandleSlugs;
 use A17\Twill\Repositories\ModuleRepository;
+use A17\Twill\Models\Contracts\TwillModelContract;
 use App\Models\Navigation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,7 @@ class NavigationRepository extends ModuleRepository
 		$this->model = $model;
 	}
 
-	public function afterSave($object, $fields)
+	public function afterSave(TwillModelContract $object, array $fields): void
 	{
 		parent::afterSave($object, $fields);
 		$this->cacheNavigation($object);

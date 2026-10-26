@@ -19,7 +19,7 @@
 
 		@include('partials.favicon')
 
-		<link rel="stylesheet" href="{{ asset('css/style.css') . (config('app.env') != 'production' ? '?' . 'now'|date('c') : '?' . config('app.version')) }}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{{ asset('css/style.css') . (config('app.env') != 'production' ? '?' . date('c') : '?' . config('app.version')) }}" type="text/css" media="screen" />
 	</head>
 	<body id="body" class="{{ !$cookies['accepted'] ? 'noscroll' : '' }}">
 		@yield('page')

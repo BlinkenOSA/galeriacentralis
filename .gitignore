@@ -4,3 +4,4 @@ resources/fonts
 .idea
 vendor
 node_modules
+.phpunit.cache

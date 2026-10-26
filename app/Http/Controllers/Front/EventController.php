@@ -16,7 +16,9 @@ class EventController extends Controller
 
 	public function show($category, $slug, Request $request)
 	{
-		$locale = app()->getLocale();
+		if ($category !== 'series' && !Category::publishedInListings()->forSlug($category)->exists()) {
+			abort(404);
+		}
 
 		$event = Event::forSlug($slug);
 
@@ -54,10 +56,19 @@ class EventController extends Controller
 
 	public function index($category, Request $request)
 	{
+		$categoryModel = Category::publishedInListings()->forSlug($category)->first();
+		if (!$categoryModel && $category !== 'series') {
+			return app(PageController::class)->show($category);
+		}
 
-		$events = Event::withActiveTranslations()->standard()->with(['slugs'])->whereHas('categories.slugs', function($query) use ($category) {
-			$query->where('slug', '=', $category);
-		})->orderBy('start', 'desc');
+		$events = Event::withActiveTranslations()->with(['slugs'])->orderBy('start', 'desc');
+		if ($category === 'series') {
+			$events->series();
+		} else {
+			$events->standard()->whereHas('categories.slugs', function ($query) use ($category) {
+				$query->where('slug', $category);
+			});
+		}
 		if (Auth::guard('twill_users')->check() == false) {
 			$events = $events->publishedInListings();
 		}
@@ -81,7 +92,7 @@ class EventController extends Controller
 		}
 
 		$meta = $this->getMeta(null);
-		$meta['title'] = Category::forSlug($category)->first()->title;
+		$meta['title'] = $categoryModel?->title ?? 'Series';
 		$events = $events->get()->groupBy(function($item) {
 			return $item->start->year;
 		})->sortKeysDesc()->all();

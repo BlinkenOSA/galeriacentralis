@@ -7,13 +7,14 @@ use A17\Twill\Repositories\Behaviors\HandleSlugs;
 use A17\Twill\Repositories\Behaviors\HandleMedias;
 use A17\Twill\Repositories\Behaviors\HandleBrowsers;
 use A17\Twill\Repositories\ModuleRepository;
+use A17\Twill\Models\Contracts\TwillModelContract;
 use App\Models\Option;
 
 class OptionRepository extends ModuleRepository
 {
 	use HandleTranslations, HandleSlugs, HandleMedias, HandleBrowsers;
 
-	protected $fieldsGroups = [
+	protected array $fieldsGroups = [
 		'options' => ['instagram', 'facebook', 'twitter', 'youtube', 'phone', 'fax', 'email', 'hours', 'address', 'programs', 'about', 'maintenance', 'impressum', 'metatitle', 'metadescription']
 	];
 
@@ -24,7 +25,7 @@ class OptionRepository extends ModuleRepository
 		$this->model = $model;
 	}
 
-	public function afterSave($object, $fields)
+	public function afterSave(TwillModelContract $object, array $fields): void
 	{
 		foreach ($this->relatedBrowsers as $browserName) {
 			$this->updateRelatedBrowser($object, $fields, $browserName);
@@ -32,7 +33,7 @@ class OptionRepository extends ModuleRepository
 		parent::afterSave($object, $fields);
 	}
 
-	public function getFormFields($object)
+	public function getFormFields(TwillModelContract $object): array
 	{
 		$fields = parent::getFormFields($object);
 

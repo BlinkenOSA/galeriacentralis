@@ -8,24 +8,25 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
-        "area17/twill": "^2.1.1",
-        "fideloper/proxy": "^4.0",
-        "kalnoy/nestedset": "^5.0",
-        "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "php": "~8.4.27",
+        "area17/twill": "^3.6",
+        "kalnoy/nestedset": "^6.0 || ^7.0",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10"
     },
     "require-dev": {
-        "facade/ignition": "^2.0",
-        "fzaninotto/faker": "^1.9.1",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "fakerphp/faker": "^1.24",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.0",
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.27"
+        }
     },
     "extra": {
         "laravel": {
@@ -46,7 +47,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
