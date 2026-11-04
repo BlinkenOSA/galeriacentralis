@@ -71,6 +71,24 @@ class UpgradeCompatibilityTest extends TestCase
         $this->followingRedirects()->get(route('twill.options.show', ['option' => 1]))->assertOk();
     }
 
+    public function test_event_create_and_edit_forms_use_the_grouped_category_browser(): void
+    {
+        $user = User::create(['name' => 'Editor', 'email' => 'editor@example.test', 'role' => 'SUPERADMIN', 'published' => true]);
+        $this->actingAs($user, 'twill_users');
+        $browserUrl = route('twill.events.categories.browser', [], false);
+
+        $this->get(route('twill.events.events.create'))->assertOk()
+            ->assertSee('endpoint="' . $browserUrl . '"', false);
+
+        $event = app(EventRepository::class)->create([
+            'title' => ['en' => 'Exhibition', 'hu' => 'Kiállítás'],
+            'languages' => [['value' => 'en', 'published' => true], ['value' => 'hu', 'published' => true]],
+        ]);
+        $this->followingRedirects()->get(route('twill.events.events.show', ['event' => $event->id]))->assertOk()
+            ->assertSee('endpoint="' . $browserUrl . '"', false);
+        $this->get($browserUrl)->assertOk();
+    }
+
     public function test_options_can_be_saved_with_legacy_grouped_fields(): void
     {
         $repository = app(OptionRepository::class);

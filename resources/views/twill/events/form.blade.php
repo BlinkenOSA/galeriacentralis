@@ -112,6 +112,7 @@
 			'max' => 1,
 			'name' => 'categories',
 			'moduleName' => 'categories',
+			'routePrefix' => 'events',
 		])
 
 		@formField('tags', [
