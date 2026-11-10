@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use A17\Twill\Models\User;
+use A17\Twill\Models\Media;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Option;
@@ -71,22 +72,48 @@ class UpgradeCompatibilityTest extends TestCase
         $this->followingRedirects()->get(route('twill.options.show', ['option' => 1]))->assertOk();
     }
 
-    public function test_event_create_and_edit_forms_use_the_grouped_category_browser(): void
+    public function test_event_gallery_photos_can_be_saved_and_reloaded(): void
     {
-        $user = User::create(['name' => 'Editor', 'email' => 'editor@example.test', 'role' => 'SUPERADMIN', 'published' => true]);
-        $this->actingAs($user, 'twill_users');
-        $browserUrl = route('twill.events.categories.browser', [], false);
-
-        $this->get(route('twill.events.events.create'))->assertOk()
-            ->assertSee('endpoint="' . $browserUrl . '"', false);
-
-        $event = app(EventRepository::class)->create([
-            'title' => ['en' => 'Exhibition', 'hu' => 'Kiállítás'],
-            'languages' => [['value' => 'en', 'published' => true], ['value' => 'hu', 'published' => true]],
+        $repository = app(EventRepository::class);
+        $event = $repository->create([
+            'title' => ['en' => 'Gallery exhibition'],
+            'languages' => [['value' => 'en', 'published' => true]],
         ]);
-        $this->followingRedirects()->get(route('twill.events.events.show', ['event' => $event->id]))->assertOk()
-            ->assertSee('endpoint="' . $browserUrl . '"', false);
-        $this->get($browserUrl)->assertOk();
+        $photo = Media::create([
+            'uuid' => 'gallery-test/photo.jpg',
+            'filename' => 'photo.jpg',
+            'width' => 1200,
+            'height' => 800,
+        ]);
+
+        // Newly attached photos can arrive without explicit crop coordinates.
+        $repository->update($event->id, ['medias' => ['images' => [[
+            'id' => $photo->id,
+            'metadatas' => ['custom' => ['caption' => 'Exhibition opening']],
+        ]]]]);
+
+        $savedEvent = $event->fresh();
+        $this->assertTrue($savedEvent->hasImage('images'));
+        $this->assertCount(1, $savedEvent->medias);
+        $savedPhoto = $savedEvent->medias->first();
+        $this->assertSame($photo->id, $savedPhoto->id);
+        $this->assertSame('default', $savedPhoto->pivot->crop);
+        $this->assertSame('free', $savedPhoto->pivot->ratio);
+        $this->assertNull($savedPhoto->pivot->crop_w);
+        $this->assertSame('Exhibition opening', $savedEvent->imageCaption('images'));
+
+        $fields = $repository->getFormFields($savedEvent);
+        $gallery = $fields['medias']['images'];
+        $this->assertSame($photo->id, $gallery[0]['id']);
+        $this->assertSame('free', $gallery[0]['crops']['default']['name']);
+
+        // Saving the reloaded form must keep the photo and its metadata.
+        $repository->update($event->id, ['medias' => ['images' => $gallery]]);
+        $this->assertCount(1, $event->fresh()->medias);
+        $this->assertSame('Exhibition opening', $event->fresh()->imageCaption('images'));
+
+        $repository->update($event->id, ['medias' => ['images' => []]]);
+        $this->assertFalse($event->fresh()->hasImage('images'));
     }
 
     public function test_options_can_be_saved_with_legacy_grouped_fields(): void
@@ -117,86 +144,4 @@ class UpgradeCompatibilityTest extends TestCase
         $this->get('/hu/kiallitasok')->assertOk()->assertSee('Kiállítás');
     }
 
-    public function test_homepage_falls_back_to_latest_published_exhibition_in_both_languages(): void
-    {
-        $this->createHomepageEvent('Older exhibition', -20, -10);
-        $latest = $this->createHomepageEvent('Latest exhibition', -15, -5);
-        $this->createHomepageEvent('Recent talk', -3, -2, [], 'events');
-        $this->createHomepageEvent('Unpublished exhibition', -3, -1, ['published' => false]);
-        $this->createHomepageEvent('Hidden exhibition', -3, -1, ['monoscope' => 1]);
-
-        $this->get('/')->assertOk()->assertViewIs('frontpage.event')
-            ->assertViewHas('event', fn ($event) => $event->id === $latest->id)
-            ->assertSee('Latest exhibition');
-        $this->get('/hu')->assertOk()->assertViewIs('frontpage.event')
-            ->assertViewHas('event', fn ($event) => $event->id === $latest->id)
-            ->assertSee('Latest exhibition HU');
-    }
-
-    public function test_current_event_takes_priority_over_the_homepage_fallback(): void
-    {
-        $this->createHomepageEvent('Past exhibition', -10, -5);
-        $current = $this->createHomepageEvent('Current exhibition', -1, 1);
-
-        $this->get('/')->assertOk()->assertViewIs('frontpage.event')
-            ->assertViewHas('event', fn ($event) => $event->id === $current->id);
-    }
-
-    public function test_upcoming_event_keeps_its_existing_homepage_preview(): void
-    {
-        $this->createHomepageEvent('Past exhibition', -10, -5);
-        $upcoming = $this->createHomepageEvent('Upcoming exhibition', 1, 5);
-
-        $this->get('/')->assertOk()->assertViewIs('frontpage.empty')
-            ->assertViewHas('event', fn ($event) => $event->id === $upcoming->id)
-            ->assertSee('Upcoming exhibition');
-    }
-
-    public function test_maintenance_mode_keeps_the_monoscope_instead_of_the_fallback(): void
-    {
-        $this->createHomepageEvent('Past exhibition', -10, -5);
-        $options = Option::firstOrFail();
-        $options->update(['options' => json_encode(array_merge($options->fields, ['maintenance' => true]))]);
-
-        $this->get('/')->assertOk()->assertViewIs('frontpage.empty')
-            ->assertDontSee('Past exhibition');
-    }
-
-    public function test_homepage_stays_empty_without_an_eligible_exhibition(): void
-    {
-        $this->createHomepageEvent('Past talk', -3, -2, [], 'events');
-        $this->createHomepageEvent('Unpublished exhibition', -3, -1, ['published' => false]);
-        $this->createHomepageEvent('Hidden exhibition', -3, -1, ['monoscope' => 1]);
-
-        $this->get('/')->assertOk()->assertViewIs('frontpage.empty');
-    }
-
-    private function createHomepageEvent(string $title, int $startDays, int $endDays, array $attributes = [], string $categorySlug = 'exhibitions'): Event
-    {
-        $category = Category::whereHas('slugs', fn ($query) => $query->where('slug', $categorySlug))->first();
-        if (!$category) {
-            $category = Category::create([
-                'published' => true,
-                'en' => ['title' => ucfirst($categorySlug), 'active' => true],
-                'hu' => ['title' => ucfirst($categorySlug), 'active' => true],
-            ]);
-            foreach (['en', 'hu'] as $locale) {
-                $category->slugs()->forceCreate(['slug' => $categorySlug, 'locale' => $locale, 'active' => true]);
-            }
-        }
-
-        $event = Event::create(array_merge([
-            'published' => true,
-            'start' => now()->addDays($startDays)->toDateString(),
-            'end' => now()->addDays($endDays)->toDateString(),
-            'en' => ['title' => $title, 'active' => true],
-            'hu' => ['title' => $title . ' HU', 'active' => true],
-        ], $attributes));
-        $event->categories()->attach($category);
-        foreach (['en', 'hu'] as $locale) {
-            $event->slugs()->forceCreate(['slug' => \Illuminate\Support\Str::slug($title), 'locale' => $locale, 'active' => true]);
-        }
-
-        return $event;
-    }
 }

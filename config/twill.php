@@ -5,6 +5,7 @@ return [
 	'admin_app_path' => env('ADMIN_APP_PATH', 'manage'),
 	'default_crops' => [
 		'image' => ['default' => [['name' => 'free', 'ratio' => 0]]],
+		'images' => ['default' => [['name' => 'free', 'ratio' => 0]]],
 		'logo' => ['default' => [['name' => 'free', 'ratio' => 0]]],
 	],
 	'blocks_table' => 'blocks',
